@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fee Voucher #{{ s.challan_no }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slip.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="toolbar no-print">
+    <button onclick="downloadPDF()">Download PDF</button>
+    <button class="secondary" onclick="window.print()">Print</button>
+    <a href="{{ url_for('home') }}">+ New Slip</a>
+</div>
+
+<div class="page" id="slip-area">
+
+{% for copy in copies %}
+<div class="voucher">
+
+    <div class="header">
+        <img class="logo-left" src="{{ url_for('static', filename='images/logo_left.png') }}" alt="">
+        <div class="header-text">
+            <div class="inst-name">CORVIT INSTITUTE OF INFORMATION TECHNOLOGY AND MANAGEMENT SCIENCES (CIITMS)</div>
+            <div class="inst-sub">Affiliated with UET Taxila | Rawalpindi Campus | Ph: 0332 4444288 | www.corvitinstitute.com</div>
+        </div>
+        <img class="logo-right" src="{{ url_for('static', filename='images/logo_right.png') }}" alt="">
+    </div>
+
+    <div class="title-row">
+        <div class="title">FEE VOUCHER</div>
+        <div class="copy-tag">{{ copy }}</div>
+    </div>
+
+    <table class="details">
+        <tr>
+            <td class="label">Challan No:</td>
+            <td class="value">{{ s.challan_no }}</td>
+            <td class="label">Issue Date:</td>
+            <td class="value">{{ s.issue_date }}</td>
+        </tr>
+        <tr>
+            <td class="label">Student Name:</td>
+            <td class="value">{{ s.student_name }}</td>
+            <td class="label">Father's Name:</td>
+            <td class="value">{{ s.father_name }}</td>
+        </tr>
+        <tr>
+            <td class="label">Registration No:</td>
+            <td class="value">{{ s.reg_no }}</td>
+            <td class="label">Program:</td>
+            <td class="value">{{ s.degree }}</td>
+        </tr>
+        <tr>
+            <td class="label">Semester:</td>
+            <td class="value">{{ s.semester }}</td>
+            <td class="label">Batch:</td>
+            <td class="value">{{ s.batch }}</td>
+        </tr>
+        <tr>
+            <td class="label">Due Date:</td>
+            <td class="value">{{ s.due_date }}</td>
+            <td class="label">Fee Type:</td>
+            <td class="value">{{ s.fee_type }} - {{ s.installment }}</td>
+        </tr>
+    </table>
+
+    <table class="fees">
+        <tr>
+            <th class="sno">S.No</th>
+            <th>Fee Description</th>
+            <th class="amount">Amount (PKR)</th>
+        </tr>
+        <tr>
+            <td class="sno">1</td>
+            <td>Tuition Fee</td>
+            <td class="amount">{{ "{:,}".format(s.tuition_fee) }}</td>
+        </tr>
+        <tr>
+            <td class="sno">2</td>
+            <td>Admission + Security Fee</td>
+            <td class="amount">{{ "{:,}".format(s.security_fee) }}</td>
+        </tr>
+        {% if s.other_fee > 0 %}
+        <tr>
+            <td class="sno">3</td>
+            <td>Other Fee</td>
+            <td class="amount">{{ "{:,}".format(s.other_fee) }}</td>
+        </tr>
+        {% endif %}
+        <tr class="total">
+            <td colspan="2">TOTAL</td>
+            <td class="amount">{{ "{:,}".format(s.total_fee) }}</td>
+        </tr>
+    </table>
+
+    <div class="words">Amount in Words: <span class="line">{{ s.amount_words }}</span></div>
+
+    <div class="bank">
+        <div class="bank-label">Bank Details:</div>
+        <div class="bank-info">
+            <div>Bank Name: <b>Dubai Islamic Bank (306 Bara Kahu Branch)</b></div>
+            <div>Account Title: <b>Corvit institute of information Technology and Management Sciences (private) Limited</b></div>
+            <div>Account No: <b>PK70DUIB0000011112431001</b></div>
+        </div>
+        <div class="sign">
+            <div>Depositor's Signature <span class="sign-line"></span></div>
+            <div>Bank Officer Signature &amp; Stamp <span class="sign-line"></span></div>
+        </div>
+    </div>
+
+</div>
+{% endfor %}
+
+</div>
+
+<script>
+    const area = document.getElementById("slip-area");
+
+    // Print dabane par (button ya Ctrl+P) slip khud A4 ek page ke hisaab se set ho jaye
+    window.addEventListener("beforeprint", () => area.classList.add("compact"));
+    window.addEventListener("afterprint", () => area.classList.remove("compact"));
+
+    // Download PDF: dialog ke baghair seedhi file download
+    async function downloadPDF() {
+        window.scrollTo(0, 0);
+        area.classList.add("compact");
+        await html2pdf().set({
+            margin: 0,
+            filename: "Fee_Voucher_{{ s.challan_no }}.pdf",
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+        }).from(area).save();
+        area.classList.remove("compact");
+    }
+</script>
+
+</body>
+</html>

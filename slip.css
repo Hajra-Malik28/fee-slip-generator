@@ -1,0 +1,304 @@
+body {
+    font-family: "Times New Roman", serif;
+    background: #eee;
+    margin: 0;
+    padding: 20px;
+    font-size: 12px;
+    color: #000;
+}
+
+.page {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 10px 20px;
+}
+
+.voucher {
+    padding: 10px 0 14px;
+    border-bottom: 1px dashed #666;
+}
+
+.voucher:last-child {
+    border-bottom: none;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #c9a227;
+    padding-bottom: 6px;
+}
+
+.logo-left { height: 42px; }
+.logo-right { height: 46px; }
+
+.header-text {
+    flex: 1;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.inst-name {
+    color: #b22222;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.inst-sub {
+    font-style: italic;
+    font-size: 10px;
+    color: #333;
+    margin-top: 3px;
+}
+
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.title {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.copy-tag {
+    background: #b22222;
+    color: #fff;
+    font-weight: bold;
+    padding: 4px 12px;
+    min-width: 140px;
+    text-align: right;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.details td {
+    border: 1px solid #888;
+    padding: 2px 5px;
+}
+
+.details td.label {
+    background: #e6e6e6;
+    font-weight: bold;
+    width: 15%;
+}
+
+.details td.value {
+    width: 35%;
+}
+
+.fees {
+    margin-top: 10px;
+}
+
+.fees th {
+    background: #111;
+    color: #fff;
+    padding: 3px 5px;
+    text-align: left;
+}
+
+.fees td {
+    border: 1px solid #888;
+    padding: 2px 5px;
+}
+
+.sno {
+    width: 8%;
+    text-align: center;
+}
+
+.amount {
+    width: 25%;
+    text-align: right;
+}
+
+.fees th.amount {
+    text-align: right;
+}
+
+.total td {
+    font-weight: bold;
+    background: #eee;
+}
+
+.words {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.words .line {
+    display: inline-block;
+    min-width: 380px;
+    border-bottom: 1px solid #000;
+}
+
+.bank {
+    display: flex;
+    gap: 20px;
+    font-size: 10px;
+    margin-top: 8px;
+}
+
+.bank-label {
+    color: #b22222;
+    font-weight: bold;
+    width: 70px;
+}
+
+.bank-info {
+    flex: 1;
+}
+
+.sign {
+    flex: 1;
+    color: #555;
+}
+
+.sign div {
+    margin-bottom: 14px;
+}
+
+.sign-line {
+    display: inline-block;
+    width: 130px;
+    border-bottom: 1px solid #555;
+}
+
+.toolbar {
+    max-width: 800px;
+    margin: 0 auto 12px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.toolbar button {
+    background: #b22222;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.toolbar button:hover {
+    background: #8f1b1b;
+}
+
+.toolbar button.secondary {
+    background: #444;
+}
+
+.toolbar button.secondary:hover {
+    background: #222;
+}
+
+.toolbar a {
+    color: #b22222;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* ---------- A4 ek page wala compact design (print aur PDF ke liye) ---------- */
+
+.page.compact {
+    width: 210mm;
+    height: 295mm;
+    max-width: none;
+    margin: 0;
+    padding: 6mm;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #fff;
+    font-size: 11px;
+    line-height: 1.15;
+}
+
+.compact .voucher {
+    height: 92mm;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 3px 0 4px;
+}
+
+.compact .header {
+    padding-bottom: 3px;
+}
+
+.compact .logo-left { height: 34px; }
+.compact .logo-right { height: 38px; }
+
+.compact .inst-name {
+    font-size: 12px;
+}
+
+.compact .inst-sub {
+    font-size: 9px;
+    margin-top: 2px;
+}
+
+.compact .title-row {
+    margin: 4px 0;
+}
+
+.compact .title {
+    font-size: 14px;
+}
+
+.compact .copy-tag {
+    padding: 2px 10px;
+}
+
+.compact .details td,
+.compact .fees td,
+.compact .fees th {
+    padding: 1px 4px;
+}
+
+.compact .fees {
+    margin-top: 5px;
+}
+
+.compact .words {
+    margin: 6px 0;
+}
+
+.compact .bank {
+    font-size: 9px;
+    margin-top: 4px;
+}
+
+.compact .sign div {
+    margin-bottom: 8px;
+}
+
+/* ---------- Print ---------- */
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    body {
+        background: #fff;
+        padding: 0;
+        margin: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .no-print {
+        display: none;
+    }
+}

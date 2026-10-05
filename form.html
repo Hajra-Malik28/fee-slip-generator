@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fee Slip Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="form-box">
+        <h1>Fee Voucher Generator</h1>
+
+        <p>
+            <a href="{{ url_for('challans') }}">View All Challans</a>
+            &nbsp;|&nbsp;
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </p>
+
+        <form method="POST" action="{{ url_for('generate') }}">
+            <div class="grid">
+                <div>
+                    <label>Student Name</label>
+                    <input type="text" name="student_name" required>
+                </div>
+                <div>
+                    <label>Father's Name</label>
+                    <input type="text" name="father_name" required>
+                </div>
+                <div>
+                    <label>Registration No</label>
+                    <input type="text" name="reg_no" required>
+                </div>
+                <div>
+                    <label>Degree</label>
+                    <select name="degree" required>
+                        <option value="">-- Select Degree --</option>
+                        <option>BE Information Engineering Technology</option>
+                        <option>BS Computer Science</option>
+                        <option>BS Software Engineering</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Semester</label>
+                    <select name="semester" required>
+                        <option value="">-- Select Semester --</option>
+                        <option>01</option><option>02</option>
+                        <option>03</option><option>04</option>
+                        <option>05</option><option>06</option>
+                        <option>07</option><option>08</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Batch</label>
+                    <input type="text" name="batch" placeholder="Fall 2026" required>
+                </div>
+                <div>
+                    <label>Installment</label>
+                    <select name="installment" required>
+                        <option value="">-- Select Installment --</option>
+                        <option>1st Installment</option>
+                        <option>2nd Installment</option>
+                        <option>3rd Installment</option>
+                        <option>Full Payment</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Fee Type</label>
+                    <select name="fee_type" required>
+                        <option value="">-- Select Fee Type --</option>
+                        <option>Tuition Fee</option>
+                        <option>Admission Fee</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Tuition Fee (PKR)</label>
+                    <input type="number" name="tuition_fee" min="0" required>
+                </div>
+                <div>
+                    <label>Admission + Security Fee (PKR)</label>
+                    <input type="number" name="security_fee" min="0" required>
+                </div>
+                <div>
+                    <label>Other Fee (PKR)</label>
+                    <input type="number" name="other_fee" min="0" value="0">
+                </div>
+                <div>
+                    <label>Due Date</label>
+                    <input type="date" name="due_date" required>
+                </div>
+            </div>
+
+            <button type="submit">Generate Fee Slip</button>
+        </form>
+    </div>
+</body>
+</html>
